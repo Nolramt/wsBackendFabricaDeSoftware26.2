@@ -24,7 +24,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 from rest_framework import routers
 
-from app.views import buscarPersoViews
+from app.views import buscarPersoViews, buscarLocalizacaoViews
 
 routers = routers.DefaultRouter()
 routers.register('personagens', PersonagemViewsets, basename="personagens")
@@ -39,6 +39,7 @@ urlpatterns = [
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('buscar/', include(routers.urls)),
-    path('', buscarPersoViews),
+    path('personagens/', buscarPersoViews),
+    path('localizacao/', buscarLocalizacaoViews),
 
 ]
