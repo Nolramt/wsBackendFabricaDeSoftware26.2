@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'rest_framework',
     'drf_spectacular',
 ]
 
@@ -117,7 +118,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'American/Recife'
+TIME_ZONE = 'America/Recife'
 
 USE_I18N = True
 
