@@ -24,7 +24,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, Spec
 
 from rest_framework import routers
 
-from app.views import buscarPersoViews, buscarLocalizacaoViews
+from app.views import buscarPersoViews, buscarLocalizacaoViews, buscarEpisodioViews
 
 routers = routers.DefaultRouter()
 routers.register('personagens', PersonagemViewsets, basename="personagens")
@@ -41,5 +41,5 @@ urlpatterns = [
     path('buscar/', include(routers.urls)),
     path('personagens/', buscarPersoViews),
     path('localizacao/', buscarLocalizacaoViews),
-
+    path('episodio/', buscarEpisodioViews),
 ]

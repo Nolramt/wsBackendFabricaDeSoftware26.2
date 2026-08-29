@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Episódio</title>
+</head>
+<body>
+    <form method="get">
+        <input type="text" name="nome" placeholder="Nome do episódio" value="{{ nome|default:'' }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if erro %}
+        <p style="color:red">{{ erro }}</p>
+    {% endif %}
+
+    {% if info %}
+        <ul>
+            {% for item in info %}
+                <li>
+                    <strong>{{ item.name }}</strong> (ID: {{ item.id }})
+                    <br>Episódio: {{ item.episode }}
+                    <br>Data de exibição: {{ item.air_date }}
+                    <br>Número de personagens: {{ item.characters|length }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
