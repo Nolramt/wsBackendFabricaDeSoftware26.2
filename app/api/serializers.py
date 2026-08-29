@@ -17,3 +17,11 @@ class LocalizacaoSerializers(serializers.Serializer):
     type =  serializers.CharField()
     dimension = serializers.CharField()
     residents = serializers.ListField(allow_empty=True)
+
+class EpisodioSerializers(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
+    air_date = serializers.CharField()
+    episode = serializers.CharField()
+    characters = serializers.ListField()
+    url = serializers.CharField()
