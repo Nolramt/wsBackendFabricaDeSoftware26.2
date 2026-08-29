@@ -18,14 +18,20 @@ from django.contrib import admin
 from django.urls import path, include
 from app.api.viewsets import PersonagemViewsets, LocalizacaoViewsets, EpisodioViewsets
 
+from app.api.viewsets import PersoFavViewsets
+
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 from rest_framework import routers
+
+from app.views import buscarPersoViews
 
 routers = routers.DefaultRouter()
 routers.register('personagens', PersonagemViewsets, basename="personagens")
 routers.register('localizacao', LocalizacaoViewsets, basename="localizacao")
 routers.register('episodio', EpisodioViewsets, basename="episodio")
+
+routers.register('personagem-fav', PersoFavViewsets, basename='personagem-fav')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +39,6 @@ urlpatterns = [
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('buscar/', include(routers.urls)),
+    path('', buscarPersoViews),
 
 ]
