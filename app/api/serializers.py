@@ -10,9 +10,10 @@ class PersonagemSerializers(serializers.Serializer):
     gender = serializers.CharField()
     image = serializers.URLField()
     episode = serializers.ListField()
-class LocalizacaoSerializers(serializers.Serializers):
+
+class LocalizacaoSerializers(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
     type =  serializers.CharField()
     dimension = serializers.CharField()
-    residentes = serializers.ListField()
+    residents = serializers.ListField(allow_empty=True)
