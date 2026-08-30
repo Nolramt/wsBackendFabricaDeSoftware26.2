@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from app.api.viewsets import PersonagemViewsets, LocalizacaoViewsets, EpisodioViewsets
+from app.api.viewsets import PersonagemViewsets, LocalizacaoViewsets, EpisodioViewsets, PersonagemFavViewSet, LocalizacaoFavViewSet, EpisodioFavViewSet
 
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
@@ -32,15 +32,18 @@ routers.register('personagens', PersonagemViewsets, basename="personagens")
 routers.register('localizacao', LocalizacaoViewsets, basename="localizacao")
 routers.register('episodio', EpisodioViewsets, basename="episodio")
 
+routers.register('favoritos/personagem', PersonagemFavViewSet, basename="favoritos-personagem")
+routers.register('favoritos/localizacao', LocalizacaoFavViewSet, basename="favoritos-localizacao")
+routers.register('favoritos/episodio', EpisodioFavViewSet, basename="favoritos-episodio")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    
+
     path('buscar/', include(routers.urls)),
-    path('personagens/', buscarPersoViews),
+    path('personagem/', buscarPersoViews),
     path('localizacao/', buscarLocalizacaoViews),
     path('episodio/', buscarEpisodioViews),
     path('favoritar-personagem/', favoritar_personagem, name='favoritar-personagem'),
