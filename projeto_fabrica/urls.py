@@ -28,9 +28,9 @@ from app.views import buscarPersoViews, buscarLocalizacaoViews, buscarEpisodioVi
 from app.views import favoritar_personagem, favoritar_localizacao, favoritar_episodio
 
 routers = routers.DefaultRouter()
-routers.register('personagens', PersonagemViewsets, basename="personagens")
-routers.register('localizacao', LocalizacaoViewsets, basename="localizacao")
-routers.register('episodio', EpisodioViewsets, basename="episodio")
+routers.register('personagem-global', PersonagemViewsets, basename="personagens")
+routers.register('localizacao-global', LocalizacaoViewsets, basename="localizacao")
+routers.register('episodio-global', EpisodioViewsets, basename="episodio")
 
 routers.register('favoritos/personagem', PersonagemFavViewSet, basename="favoritos-personagem")
 routers.register('favoritos/localizacao', LocalizacaoFavViewSet, basename="favoritos-localizacao")
