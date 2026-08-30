@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import requests
-
+from .models import PersonagemFav, LocalizacaoFav, EpisodioFav
 # Create your views here.
 
 def buscarPersoViews(request):
@@ -73,4 +73,43 @@ def buscarEpisodioViews(request):
         'erro': erro,
         'nome': nome,
     })
+
+def favoritar_personagem(request):
+    if request.method == "POST":
+        PersonagemFav.objects.get_or_create(
+            id_externo=request.POST.get("id_externo"),
+            defaults={
+                "name": request.POST.get("name"),
+                "status": request.POST.get("status"),
+                "species": request.POST.get("species"),
+                "type": request.POST.get("type", ""),
+                "gender": request.POST.get("gender"),
+                "image": request.POST.get("image"),
+            }
+        )
+    return redirect(request.META.get("HTTP_REFERER", "/personagem/"))
+
+def favoritar_localizacao(request):
+    if request.method == "POST":
+        LocalizacaoFav.objects.get_or_create(
+            id_externo=request.POST.get("id_externo"),
+            defaults={
+                "name": request.POST.get("name"),
+                "type": request.POST.get("type"),
+                "dimension": request.POST.get("dimension"),
+            }
+        )
+    return redirect(request.META.get("HTTP_REFERER", "/localizacao/"))
+
+def favoritar_episodio(request):
+    if request.method == "POST":
+        EpisodioFav.objects.get_or_create(
+            id_externo=request.POST.get("id_externo"),
+            defaults={
+                "name": request.POST.get("name"),
+                "air_date": request.POST.get("air_date"),
+                "episode": request.POST.get("episode"),
+            }
+        )
+    return redirect(request.META.get("HTTP_REFERER", "/episodio/"))
 
