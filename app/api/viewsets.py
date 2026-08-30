@@ -3,6 +3,8 @@ from .serializers import PersonagemSerializers, LocalizacaoSerializers, Episodio
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
+from ..models import PersonagemFav, LocalizacaoFav, EpisodioFav
+from .serializers import PersonagemFavSerializer, LocalizacaoFavSerializer, EpisodioFavSerializer
 
 class PersonagemViewsets(viewsets.ViewSet):
     def list(self, request):
@@ -107,3 +109,17 @@ class EpisodioViewsets(viewsets.ViewSet):
                 },
                 status=status.HTTP_503_SERVICE_UNAVAILABLE
             )
+
+class PersonagemFavViewSet(viewsets.ModelViewSet):
+    queryset = PersonagemFav.objects.all()
+    serializer_class = PersonagemFavSerializer
+
+
+class LocalizacaoFavViewSet(viewsets.ModelViewSet):
+    queryset = LocalizacaoFav.objects.all()
+    serializer_class = LocalizacaoFavSerializer
+
+
+class EpisodioFavViewSet(viewsets.ModelViewSet):
+    queryset = EpisodioFav.objects.all()
+    serializer_class = EpisodioFavSerializer

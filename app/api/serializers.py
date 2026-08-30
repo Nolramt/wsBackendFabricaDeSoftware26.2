@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from ..models import PersonagemFav, LocalizacaoFav, EpisodioFav
 
 class PersonagemSerializers(serializers.Serializer):
 
@@ -25,3 +26,20 @@ class EpisodioSerializers(serializers.Serializer):
     episode = serializers.CharField()
     characters = serializers.ListField()
     url = serializers.CharField()
+
+class PersonagemFavSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PersonagemFav
+        fields = "__all__"
+
+
+class LocalizacaoFavSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LocalizacaoFav
+        fields = "__all__"
+
+
+class EpisodioFavSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EpisodioFav
+        fields = "__all__"
