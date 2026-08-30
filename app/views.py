@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 import requests
-from .models import PersonagemFav, LocalizacaoFav, EpisodioFav
+from .models import PersonagemFav, LocalizacaoFav, EpisodioFav, PastaFavoritos
 # Create your views here.
 
 def buscarPersoViews(request):
@@ -76,6 +76,9 @@ def buscarEpisodioViews(request):
 
 def favoritar_personagem(request):
     if request.method == "POST":
+        nome_pasta = request.POST.get("pasta", "Geral")
+        pasta, _ = PastaFavoritos.objects.get_or_create(nome=nome_pasta)
+
         PersonagemFav.objects.get_or_create(
             id_externo=request.POST.get("id_externo"),
             defaults={
@@ -85,30 +88,39 @@ def favoritar_personagem(request):
                 "type": request.POST.get("type", ""),
                 "gender": request.POST.get("gender"),
                 "image": request.POST.get("image"),
+                "pasta": pasta,
             }
         )
     return redirect(request.META.get("HTTP_REFERER", "/personagem/"))
 
 def favoritar_localizacao(request):
     if request.method == "POST":
+        nome_pasta = request.POST.get("pasta", "Geral")
+        pasta, _ = PastaFavoritos.objects.get_or_create(nome=nome_pasta)
+        
         LocalizacaoFav.objects.get_or_create(
             id_externo=request.POST.get("id_externo"),
             defaults={
                 "name": request.POST.get("name"),
                 "type": request.POST.get("type"),
                 "dimension": request.POST.get("dimension"),
+                "pasta": pasta,
             }
         )
     return redirect(request.META.get("HTTP_REFERER", "/localizacao/"))
 
 def favoritar_episodio(request):
     if request.method == "POST":
+        nome_pasta = request.POST.get("pasta", "Geral")
+        pasta, _ = PastaFavoritos.objects.get_or_create(nome=nome_pasta)
+
         EpisodioFav.objects.get_or_create(
             id_externo=request.POST.get("id_externo"),
             defaults={
                 "name": request.POST.get("name"),
                 "air_date": request.POST.get("air_date"),
                 "episode": request.POST.get("episode"),
+                "pasta": pasta,
             }
         )
     return redirect(request.META.get("HTTP_REFERER", "/episodio/"))
