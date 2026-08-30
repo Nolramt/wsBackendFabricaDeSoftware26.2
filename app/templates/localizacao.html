@@ -23,6 +23,15 @@
                     <br>Tipo: {{ item.type }}
                     <br>Dimensão: {{ item.dimension }}
                     <br>Número de residentes: {{ item.residents|length }}
+
+                    <form method="post" action="{% url 'favoritar-localizacao' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id_externo" value="{{ item.id }}">
+                        <input type="hidden" name="name" value="{{ item.name }}">
+                        <input type="hidden" name="type" value="{{ item.type }}">
+                        <input type="hidden" name="dimension" value="{{ item.dimension }}">
+                        <button type="submit">Favoritar</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>

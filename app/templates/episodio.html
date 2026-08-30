@@ -23,6 +23,14 @@
                     <br>Episódio: {{ item.episode }}
                     <br>Data de exibição: {{ item.air_date }}
                     <br>Número de personagens: {{ item.characters|length }}
+                    <form method="post" action="{% url 'favoritar-episodio' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id_externo" value="{{ item.id }}">
+                        <input type="hidden" name="name" value="{{ item.name }}">
+                        <input type="hidden" name="air_date" value="{{ item.air_date }}">
+                        <input type="hidden" name="episode" value="{{ item.episode }}">
+                        <button type="submit">Favoritar</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>

@@ -21,11 +21,19 @@
                 <li>
                     <strong>{{ item.name }}</strong> (ID: {{ item.id }}) — {{ item.status }}, {{ item.species }}
                     <br>Gênero: {{ item.gender }}
-                    {% if item.type %}
-                        <br>Tipo: {{ item.type }}
-                    {% endif %}
-                    <br>Última localização conhecida: {{ item.location.name }}
                     <br><img src="{{ item.image }}" width="100">
+
+                    <form method="post" action="{% url 'favoritar-personagem' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id_externo" value="{{ item.id }}">
+                        <input type="hidden" name="name" value="{{ item.name }}">
+                        <input type="hidden" name="status" value="{{ item.status }}">
+                        <input type="hidden" name="species" value="{{ item.species }}">
+                        <input type="hidden" name="type" value="{{ item.type }}">
+                        <input type="hidden" name="gender" value="{{ item.gender }}">
+                        <input type="hidden" name="image" value="{{ item.image }}">
+                        <button type="submit">Favoritar</button>
+                    </form>
                 </li>
             {% endfor %}
         </ul>
