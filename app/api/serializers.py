@@ -28,18 +28,21 @@ class EpisodioSerializers(serializers.Serializer):
     url = serializers.CharField()
 
 class PersonagemFavSerializer(serializers.ModelSerializer):
+    pasta_nome = serializers.CharField(source="pasta.nome", read_only=True)
     class Meta:
         model = PersonagemFav
         fields = "__all__"
 
 
 class LocalizacaoFavSerializer(serializers.ModelSerializer):
+    pasta_nome = serializers.CharField(source="pasta.nome", read_only=True)
     class Meta:
         model = LocalizacaoFav
         fields = "__all__"
 
 
 class EpisodioFavSerializer(serializers.ModelSerializer):
+    pasta_nome = serializers.CharField(source="pasta.nome", read_only=True)
     class Meta:
         model = EpisodioFav
         fields = "__all__"
